@@ -6,6 +6,7 @@ import { WishlistProvider } from "../lib/WishlistContext";
 import { CartProvider } from "../lib/CartContext";
 import { Header } from "../components/Header";
 import { Footer } from "../components/Footer";
+import { GoogleAnalytics } from "../components/GoogleAnalytics";
 import { FONTS, C } from "../lib/constants";
 
 export const metadata = {
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
                 </Suspense>
                 {children}
                 <Footer />
+                <GoogleAnalytics />
               </CartProvider>
             </WishlistProvider>
           </CustomerAuthProvider>
