@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { X, Loader2 } from "lucide-react";
 import { C, api, money, inputStyle, API_BASE } from "../../lib/constants";
+import { OrderStatusTimeline } from "../../components/OrderStatusTimeline";
 import { useLang } from "../../lib/LangContext";
 import { useCustomerAuth } from "../../lib/CustomerAuthContext";
 
@@ -235,7 +236,10 @@ function AccountDashboard({ customerInfo, customerToken, onLogout }) {
                 </div>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: C.muted, margin: "4px 0 10px" }}>{new Date(o.created_at).toLocaleDateString()} — {money(o.total)}</p>
                 {o.items.map((i) => (
-                  <p key={i.id} style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: C.char, margin: "2px 0" }}>{i.product_name} × {i.quantity} — {i.brand_name}</p>
+                  <div key={i.id} style={{ margin: "8px 0" }}>
+                    <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: C.char, margin: 0 }}>{i.product_name} × {i.quantity} — {i.brand_name}</p>
+                    <OrderStatusTimeline paymentStatus={o.payment_status} fulfillmentStatus={i.fulfillment_status} />
+                  </div>
                 ))}
                 
                 <a

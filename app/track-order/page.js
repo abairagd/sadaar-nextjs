@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { C, api, money, inputStyle, API_BASE } from "../../lib/constants";
+import { OrderStatusTimeline } from "../../components/OrderStatusTimeline";
 import { useLang } from "../../lib/LangContext";
 
 export default function TrackOrderPage() {
@@ -127,6 +128,7 @@ export default function TrackOrderPage() {
                   color: i.fulfillment_status === "pending" ? "#8A5A1E" : "#2F5B3C",
                 }}>{i.fulfillment_status}</span>
               </div>
+              <OrderStatusTimeline paymentStatus={order.payment_status} fulfillmentStatus={i.fulfillment_status} />
               {i.cancellation_status === "none" && i.fulfillment_status === "pending" && order.payment_status === "paid" && (
                 <button onClick={() => requestCancellation(i.id)} disabled={cancelingId === i.id} style={{ marginTop: 8, background: "none", border: `1px solid ${C.line}`, padding: "6px 12px", fontFamily: "Inter, sans-serif", fontSize: 12, cursor: "pointer", color: C.char }}>
                   {cancelingId === i.id ? t.sending : t.requestCancellation}
