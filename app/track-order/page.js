@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { C, api, money, inputStyle } from "../../lib/constants";
+import { C, api, money, inputStyle, API_BASE } from "../../lib/constants";
 import { useLang } from "../../lib/LangContext";
 
 export default function TrackOrderPage() {
@@ -101,7 +101,16 @@ export default function TrackOrderPage() {
             <p style={{ fontFamily: "Fraunces, serif", fontSize: 18, color: C.ink, margin: 0 }}>Order #{order.id}</p>
             <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, textTransform: "uppercase", letterSpacing: "0.05em", color: order.payment_status === "paid" ? "#2F5B3C" : C.muted }}>{order.payment_status}</span>
           </div>
-          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: C.muted, marginBottom: 20 }}>{order.shipping_city} · placed {new Date(order.created_at).toLocaleDateString()}</p>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: C.muted, marginBottom: 8 }}>{order.shipping_city} · placed {new Date(order.created_at).toLocaleDateString()}</p>
+          
+          <a
+            href={`${API_BASE}/orders/${order.id}/receipt?contact=${encodeURIComponent(contact.trim())}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ display: "inline-block", marginBottom: 20, background: "none", border: `1px solid ${C.line}`, padding: "6px 12px", fontFamily: "Inter, sans-serif", fontSize: 12, color: C.char, textDecoration: "none" }}
+          >
+            Download receipt (PDF)
+          </a>
           {cancelError && <p style={{ color: "#A3402F", fontFamily: "Inter, sans-serif", fontSize: 12, margin: "8px 0" }}>{cancelError}</p>}
           {order.items.map((i) => (
             <div key={i.id} style={{ padding: "12px 0", borderBottom: `1px solid ${C.line}` }}>

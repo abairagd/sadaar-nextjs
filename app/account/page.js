@@ -3,7 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { X, Loader2 } from "lucide-react";
-import { C, api, money, inputStyle } from "../../lib/constants";
+import { C, api, money, inputStyle, API_BASE } from "../../lib/constants";
 import { useLang } from "../../lib/LangContext";
 import { useCustomerAuth } from "../../lib/CustomerAuthContext";
 
@@ -237,6 +237,15 @@ function AccountDashboard({ customerInfo, customerToken, onLogout }) {
                 {o.items.map((i) => (
                   <p key={i.id} style={{ fontFamily: "Inter, sans-serif", fontSize: 13, color: C.char, margin: "2px 0" }}>{i.product_name} × {i.quantity} — {i.brand_name}</p>
                 ))}
+                
+                <a
+                  href={`${API_BASE}/orders/${o.id}/receipt?contact=${encodeURIComponent(customerInfo?.email || "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: "inline-block", marginTop: 10, background: "none", border: `1px solid ${C.line}`, padding: "6px 12px", fontFamily: "Inter, sans-serif", fontSize: 12, color: C.char, textDecoration: "none" }}
+                >
+                  Download receipt (PDF)
+                </a>
               </div>
             ))}
           </div>
