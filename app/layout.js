@@ -18,6 +18,11 @@ export const metadata = {
     description: "A curated marketplace for independent Saudi fashion brands.",
     url: "https://sadaar.com",
     siteName: "SADAAR",
+    images: ["/og-image.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },
 };
