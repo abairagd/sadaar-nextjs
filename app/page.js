@@ -49,9 +49,9 @@ export default async function HomePage() {
             <Sparkles size={16} color={C.bronze} />
             <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 20, color: C.ink, margin: 0 }}>{t.spotlight}</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 828px))", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(260px, 919px))", gap: 16 }}>
             {spotlights.map((s) => (
-              <Link key={s.id} href={`/brand/${s.brand_slug}`} style={{ textAlign: "left", background: s.image_url ? `linear-gradient(to top, rgba(20,24,25,0.85), rgba(20,24,25,0.15)), url(${s.image_url}) center/cover` : C.deep, color: C.sand, border: "none", padding: 20, cursor: "pointer", textDecoration: "none", display: "flex", flexDirection: "column", justifyContent: s.image_url ? "flex-end" : "flex-start", aspectRatio: s.image_url ? "414 / 635" : "auto" }}>
+              <Link key={s.id} href={`/brand/${s.brand_slug}`} style={{ textAlign: "left", background: s.image_url ? `linear-gradient(to top, rgba(20,24,25,0.85), rgba(20,24,25,0.15)), url(${s.image_url}) center/cover` : C.deep, color: C.sand, border: "none", padding: 20, cursor: "pointer", textDecoration: "none", display: "flex", flexDirection: "column", justifyContent: s.image_url ? "flex-end" : "flex-start", aspectRatio: s.image_url ? "919 / 1409" : "auto" }}>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: C.bronze, margin: 0 }}>{t.spotlight}</p>
                 <p style={{ fontFamily: "Fraunces, serif", fontSize: 18, margin: "6px 0" }}>{s.brand_name}</p>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#C5CDCE", margin: 0 }}>{s.brand_description}</p>
