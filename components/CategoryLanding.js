@@ -20,7 +20,8 @@ export function CategoryLanding({ cat, lang, spotlights, brands }) {
   // Only brands that paid for this category's own space.
   const sponsored = (spotlights || []).filter((s) => s.placement === cat);
   const catBrands = (brands || []).filter((b) => brandMatchesCategory(b.category, cat));
-  const firstSub = subcats[0];
+  const comingSoon = cat === "Perfumes"; // no perfume brands live yet
+  const firstSub = comingSoon ? null : subcats[0];
 
   return (
     <div>
@@ -31,6 +32,9 @@ export function CategoryLanding({ cat, lang, spotlights, brands }) {
           <p style={eyebrow}>{catLabel}</p>
           <h1 style={{ fontFamily: "Fraunces, serif", fontWeight: 500, fontSize: "clamp(32px, 5.5vw, 56px)", lineHeight: 1.08, color: C.warm, margin: "12px 0 0" }}>{copy.title}</h1>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: 15, color: "#E7E2D3", marginTop: 16, maxWidth: 460, lineHeight: 1.6 }}>{copy.sub}</p>
+          {comingSoon && (
+            <p style={{ marginTop: 26, border: `1px solid ${C.warm}`, color: C.warm, padding: "10px 22px", fontFamily: "Inter, sans-serif", fontSize: 13, letterSpacing: "0.14em", textTransform: "uppercase", width: "fit-content" }}>{t.landingComingSoon}</p>
+          )}
           {firstSub && (
             <Link href={`/browse?cat=${cat}&subcat=${encodeURIComponent(firstSub)}`} style={{ marginTop: 26, background: C.warm, color: C.ink, padding: "12px 26px", fontFamily: "Inter, sans-serif", fontSize: 14, textDecoration: "none", width: "fit-content" }}>
               {t.landingShop} {SUBCATEGORY_LABELS[lang][firstSub] || firstSub}
@@ -39,6 +43,14 @@ export function CategoryLanding({ cat, lang, spotlights, brands }) {
         </div>
       </section>
 
+      {comingSoon && (
+        <section style={{ maxWidth: 1180, margin: "0 auto", padding: "56px 24px 24px", textAlign: "center" }}>
+          <h2 style={{ ...h2, margin: "0 0 10px" }}>{t.landingComingSoon}</h2>
+          <p style={{ fontFamily: "Inter, sans-serif", fontSize: 14, color: C.muted, margin: 0 }}>{t.landingComingSoonSub}</p>
+        </section>
+      )}
+
+      {!comingSoon && (
       <section style={{ maxWidth: 1180, margin: "0 auto", padding: "40px 24px 8px" }}>
         <h2 style={h2}>{t.landingShopBy}</h2>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16 }}>
@@ -57,6 +69,7 @@ export function CategoryLanding({ cat, lang, spotlights, brands }) {
           })}
         </div>
       </section>
+      )}
 
       {sponsored.length > 0 && (
         <section style={{ maxWidth: "none", margin: "0 auto", padding: "36px 24px 8px" }}>
