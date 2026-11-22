@@ -1,5 +1,7 @@
 import { Suspense } from "react";
-import { api } from "../../lib/constants";
+import { cookies } from "next/headers";
+import { api, CATEGORIES } from "../../lib/constants";
+import { CategoryLanding } from "../../components/CategoryLanding";
 import { ProductCard } from "../../components/ProductCard";
 import { BrowseSidebar, BrowseSortBar, NoResultsMessage } from "../../components/BrowseFilters";
 
@@ -28,7 +30,21 @@ async function getBrowseData(searchParams) {
   return { products, brands };
 }
 
+// A bare category link (/browse?cat=Men) shows that category's landing page
+// instead of a product list. Products appear once any other filter is chosen,
+// such as a subcategory.
+const FILTER_KEYS = ["subcat", "ptype", "brand", "sort", "search", "minPrice", "maxPrice"];
+
 export default async function BrowsePage({ searchParams }) {
+  if (CATEGORIES.includes(searchParams.cat) && !FILTER_KEYS.some((k) => searchParams[k])) {
+    const lang = cookies().get("sadaar_lang")?.value === "ar" ? "ar" : "en";
+    const [spotlights, allBrands] = await Promise.all([
+      api("/spotlight/active").catch(() => []),
+      api("/brands").catch(() => []),
+    ]);
+    return <CategoryLanding cat={searchParams.cat} lang={lang} spotlights={spotlights} brands={allBrands} />;
+  }
+
   const { products, brands } = await getBrowseData(searchParams);
 
   const activeFilterCount = [

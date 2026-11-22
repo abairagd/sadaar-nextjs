@@ -49,7 +49,7 @@ export default async function HomePage() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 16 }}>
             {spotlights.map((s) => (
-              <Link key={s.id} href={`/browse?cat=${s.category}`} style={{ textAlign: "left", background: C.deep, color: C.sand, border: "none", padding: 20, cursor: "pointer", textDecoration: "none", display: "block" }}>
+              <Link key={s.id} href={`/brand/${s.brand_slug}`} style={{ textAlign: "left", background: C.deep, color: C.sand, border: "none", padding: 20, cursor: "pointer", textDecoration: "none", display: "block" }}>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: C.bronze, margin: 0 }}>{t.spotlight}</p>
                 <p style={{ fontFamily: "Fraunces, serif", fontSize: 18, margin: "6px 0" }}>{s.brand_name}</p>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#C5CDCE", margin: 0 }}>{s.brand_description}</p>
