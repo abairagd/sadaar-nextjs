@@ -32,6 +32,7 @@ export function BrowseSidebar({ brands }) {
   const [minPrice, setMinPrice] = useState(searchParams.get("minPrice") || "");
   const [maxPrice, setMaxPrice] = useState(searchParams.get("maxPrice") || "");
   const isFirstRender = useRef(true);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     if (isFirstRender.current) { isFirstRender.current = false; return; }
@@ -53,6 +54,20 @@ export function BrowseSidebar({ brands }) {
           placeholder={t.searchPlaceholder}
           style={{ width: "100%", border: `1px solid ${C.line}`, padding: "8px 10px", fontFamily: "Inter, sans-serif", fontSize: 13, background: C.warm, color: C.char, marginBottom: 20, boxSizing: "border-box" }}
         />
+
+        {/* Phones only: the filter groups below are hidden until this is tapped. */}
+        <button
+          type="button"
+          className="sadaar-filter-toggle"
+          onClick={() => setFiltersOpen((o) => !o)}
+          aria-expanded={filtersOpen}
+          style={{ width: "100%", justifyContent: "space-between", alignItems: "center", background: "none", border: `1px solid ${C.line}`, padding: "10px 12px", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: 13, color: C.char, marginBottom: 16 }}
+        >
+          <span>{t.filters}{activeFilterCount > 0 ? ` (${activeFilterCount})` : ""}</span>
+          <span aria-hidden="true">{filtersOpen ? "−" : "+"}</span>
+        </button>
+
+        <div className="sadaar-filter-panel" data-open={filtersOpen ? "true" : "false"}>
 
         {cat !== "all" && (SUBCATEGORIES_BY_CATEGORY[cat] || []).length > 0 && (
           <>
@@ -92,6 +107,7 @@ export function BrowseSidebar({ brands }) {
             {t.clearFilters} ({activeFilterCount})
           </button>
         )}
+        </div>
       </div>
     </aside>
   );
