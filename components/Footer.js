@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { FaInstagram, FaTiktok, FaSnapchat, FaXTwitter, FaWhatsapp } from "react-icons/fa6";
-import { C, CATEGORIES } from "../lib/constants";
+import { C, CATEGORIES, SOCIAL } from "../lib/constants";
 import { useLang } from "../lib/LangContext";
 
 const footerLink = { display: "block", background: "none", border: "none", padding: 0, cursor: "pointer", color: "#C5CDCE", fontFamily: "Inter, sans-serif", fontSize: 13, textAlign: "left", textDecoration: "none" };
@@ -17,12 +17,11 @@ export function Footer() {
           <div style={{ fontFamily: "Fraunces, serif", fontSize: 22, marginBottom: 8 }}>SADAAR</div>
           <p style={{ fontFamily: "Inter, sans-serif", fontSize: 13, lineHeight: 1.6, color: "#C5CDCE" }}>{t.footerTagline}</p>
           <div style={{ display: "flex", gap: 14, marginTop: 16 }}>
-            {/* Placeholder hrefs — replace with real profile URLs when ready */}
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ color: "#C5CDCE", display: "flex" }}><FaInstagram size={19} /></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="TikTok" style={{ color: "#C5CDCE", display: "flex" }}><FaTiktok size={19} /></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Snapchat" style={{ color: "#C5CDCE", display: "flex" }}><FaSnapchat size={19} /></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="X" style={{ color: "#C5CDCE", display: "flex" }}><FaXTwitter size={19} /></a>
-            <a href="#" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style={{ color: "#C5CDCE", display: "flex" }}><FaWhatsapp size={19} /></a>
+            {SOCIAL.instagram && <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ color: "#C5CDCE", display: "flex" }}><FaInstagram size={19} /></a>}
+            {SOCIAL.tiktok && <a href={SOCIAL.tiktok} target="_blank" rel="noopener noreferrer" aria-label="TikTok" style={{ color: "#C5CDCE", display: "flex" }}><FaTiktok size={19} /></a>}
+            {SOCIAL.snapchat && <a href={SOCIAL.snapchat} target="_blank" rel="noopener noreferrer" aria-label="Snapchat" style={{ color: "#C5CDCE", display: "flex" }}><FaSnapchat size={19} /></a>}
+            {SOCIAL.x && <a href={SOCIAL.x} target="_blank" rel="noopener noreferrer" aria-label="X" style={{ color: "#C5CDCE", display: "flex" }}><FaXTwitter size={19} /></a>}
+            {SOCIAL.whatsapp && <a href={SOCIAL.whatsapp} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" style={{ color: "#C5CDCE", display: "flex" }}><FaWhatsapp size={19} /></a>}
           </div>
         </div>
         <div style={{ fontFamily: "Inter, sans-serif", fontSize: 13, lineHeight: 2, color: "#C5CDCE" }}>
