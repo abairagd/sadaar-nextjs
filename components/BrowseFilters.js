@@ -71,17 +71,17 @@ export function BrowseSidebar({ brands }) {
 
         {cat !== "all" && (SUBCATEGORIES_BY_CATEGORY[cat] || []).length > 0 && (
           <>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, marginBottom: 10 }}>{categoryLabel(cat)}</p>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: C.char, marginBottom: 10 }}>{categoryLabel(cat)}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 24 }}>
               {["all", ...SUBCATEGORIES_BY_CATEGORY[cat]].map((s) => (
-                <button key={s} onClick={() => updateParams({ subcat: s, ptype: "all" })} style={{ textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: 14, color: subcat === s ? C.ink : C.muted, fontWeight: subcat === s ? 600 : 400 }}>{s === "all" ? t.all : subcategoryLabel(s)}</button>
+                <button key={s} onClick={() => updateParams({ subcat: s, ptype: "all" })} style={{ textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: 15, alignSelf: "flex-start", color: C.ink, fontWeight: subcat === s ? 700 : 500, borderBottom: subcat === s ? `2px solid ${C.bronze}` : "2px solid transparent", padding: "2px 0" }}>{s === "all" ? t.all : subcategoryLabel(s)}</button>
               ))}
             </div>
           </>
         )}
         {subcat !== "all" && ((PRODUCT_TYPES_BY_CATEGORY[cat] && PRODUCT_TYPES_BY_CATEGORY[cat][subcat]) || []).length > 0 && (
           <>
-            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, marginBottom: 10 }}>{subcategoryLabel(subcat)}</p>
+            <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: C.char, marginBottom: 10 }}>{subcategoryLabel(subcat)}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 24 }}>
               {(() => {
                 const groupHeadings = { tops: t.groupTops, pants: t.groupPants };
@@ -98,7 +98,7 @@ export function BrowseSidebar({ brands }) {
                     <Fragment key={pt}>
                       {heading && <p style={headingStyle}>{heading}</p>}
                       {gap && <div style={{ height: 10 }} />}
-                      <button onClick={() => updateParams({ ptype: pt })} style={{ textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: 14, color: ptype === pt ? C.ink : C.muted, fontWeight: ptype === pt ? 600 : 400 }}>{pt === "all" ? t.all : productTypeLabel(pt)}</button>
+                      <button onClick={() => updateParams({ ptype: pt })} style={{ textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: 15, alignSelf: "flex-start", color: C.ink, fontWeight: ptype === pt ? 700 : 500, borderBottom: ptype === pt ? `2px solid ${C.bronze}` : "2px solid transparent", padding: "2px 0" }}>{pt === "all" ? t.all : productTypeLabel(pt)}</button>
                     </Fragment>
                   );
                 });
@@ -106,14 +106,14 @@ export function BrowseSidebar({ brands }) {
             </div>
           </>
         )}
-        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, marginBottom: 10 }}>{t.brand}</p>
+        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: C.char, marginBottom: 10 }}>{t.brand}</p>
         <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 24 }}>
           {[{ id: "all", name: t.all }, ...brands].map((b) => (
-            <button key={b.id} onClick={() => updateParams({ brand: String(b.id) })} style={{ textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: 14, color: brand === String(b.id) ? C.ink : C.muted, fontWeight: brand === String(b.id) ? 600 : 400 }}>{b.name}</button>
+            <button key={b.id} onClick={() => updateParams({ brand: String(b.id) })} style={{ textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: 15, alignSelf: "flex-start", color: C.ink, fontWeight: brand === String(b.id) ? 700 : 500, borderBottom: brand === String(b.id) ? `2px solid ${C.bronze}` : "2px solid transparent", padding: "2px 0" }}>{b.name}</button>
           ))}
         </div>
 
-        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, marginBottom: 10 }}>{t.price}</p>
+        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: C.char, marginBottom: 10 }}>{t.price}</p>
         <div style={{ display: "flex", gap: 6, marginBottom: 20 }}>
           <input value={minPrice} onChange={(e) => setMinPrice(e.target.value)} type="number" placeholder={t.min} style={{ width: "50%", border: `1px solid ${C.line}`, padding: "7px 8px", fontFamily: "Inter, sans-serif", fontSize: 13, background: C.warm, color: C.char, boxSizing: "border-box" }} />
           <input value={maxPrice} onChange={(e) => setMaxPrice(e.target.value)} type="number" placeholder={t.max} style={{ width: "50%", border: `1px solid ${C.line}`, padding: "7px 8px", fontFamily: "Inter, sans-serif", fontSize: 13, background: C.warm, color: C.char, boxSizing: "border-box" }} />
