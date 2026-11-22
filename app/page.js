@@ -23,7 +23,9 @@ export default async function HomePage() {
   const lang = cookieStore.get("sadaar_lang")?.value === "ar" ? "ar" : "en";
   const t = T[lang];
 
-  const { brands, products, spotlights } = await getHomeData();
+  const { brands, products, spotlights: allSpotlights } = await getHomeData();
+  // Only brands that paid for the homepage space appear here.
+  const spotlights = allSpotlights.filter((s) => (s.placement || "Home") === "Home");
   const featured = products.slice(0, 8);
 
   return (

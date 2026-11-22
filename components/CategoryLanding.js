@@ -17,7 +17,8 @@ export function CategoryLanding({ cat, lang, spotlights, brands }) {
   const subcats = SUBCATEGORIES_BY_CATEGORY[cat] || [];
   const tone = catTone[cat] || catTone.Men;
 
-  const sponsored = (spotlights || []).filter((s) => brandMatchesCategory(s.category, cat));
+  // Only brands that paid for this category's own space.
+  const sponsored = (spotlights || []).filter((s) => s.placement === cat);
   const catBrands = (brands || []).filter((b) => brandMatchesCategory(b.category, cat));
   const firstSub = subcats[0];
 
