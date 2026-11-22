@@ -61,7 +61,7 @@ export function CategoryLanding({ cat, lang, spotlights, brands }) {
       {sponsored.length > 0 && (
         <section style={{ maxWidth: 1180, margin: "0 auto", padding: "36px 24px 8px" }}>
           <h2 style={h2}>{t.landingSponsored}</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(170px, 230px))", gap: 16 }}>
             {sponsored.map((s) => (
               <Link key={s.id} href={`/brand/${s.brand_slug}`} style={{ background: s.image_url ? `linear-gradient(to top, rgba(20,24,25,0.85), rgba(20,24,25,0.15)), url(${s.image_url}) center/cover` : C.deep, color: C.sand, padding: 20, textDecoration: "none", display: "flex", flexDirection: "column", justifyContent: s.image_url ? "flex-end" : "flex-start", aspectRatio: s.image_url ? "4 / 5" : "auto" }}>
                 <p style={{ ...eyebrow, fontSize: 10 }}>{t.landingSponsoredTag}</p>
