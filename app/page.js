@@ -49,7 +49,7 @@ export default async function HomePage() {
             <Sparkles size={16} color={C.bronze} />
             <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 20, color: C.ink, margin: 0 }}>{t.spotlight}</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20, maxWidth: 1000, margin: "0 auto" }}>
             {spotlights.map((s) => (
               <Link key={s.id} href={`/brand/${s.brand_slug}`} style={{ textAlign: "left", background: s.image_url ? `linear-gradient(to top, rgba(20,24,25,0.85), rgba(20,24,25,0.15)), url(${s.image_url}) center/cover` : C.deep, color: C.sand, border: "none", padding: 20, cursor: "pointer", textDecoration: "none", display: "flex", flexDirection: "column", justifyContent: s.image_url ? "flex-end" : "flex-start", height: s.image_url ? "max(420px, calc(100vh - 140px))" : "auto" }}>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: C.bronze, margin: 0 }}>{t.spotlight}</p>
