@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { Fragment, useState, useEffect, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { C, SUBCATEGORIES_BY_CATEGORY, PRODUCT_TYPES_BY_CATEGORY } from "../lib/constants";
+import { C, SUBCATEGORIES_BY_CATEGORY, PRODUCT_TYPES_BY_CATEGORY, PRODUCT_TYPE_GROUP } from "../lib/constants";
 import { useLang } from "../lib/LangContext";
 
 function useBrowseParams() {
@@ -83,9 +83,26 @@ export function BrowseSidebar({ brands }) {
           <>
             <p style={{ fontFamily: "Inter, sans-serif", fontSize: 11, letterSpacing: "0.08em", textTransform: "uppercase", color: C.muted, marginBottom: 10 }}>{subcategoryLabel(subcat)}</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 24 }}>
-              {["all", ...PRODUCT_TYPES_BY_CATEGORY[cat][subcat]].map((pt) => (
-                <button key={pt} onClick={() => updateParams({ ptype: pt })} style={{ textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: 14, color: ptype === pt ? C.ink : C.muted, fontWeight: ptype === pt ? 600 : 400 }}>{pt === "all" ? t.all : productTypeLabel(pt)}</button>
-              ))}
+              {(() => {
+                const groupHeadings = { tops: t.groupTops, pants: t.groupPants };
+                const headingStyle = { fontFamily: "Inter, sans-serif", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: C.bronze, margin: "10px 0 0" };
+                let prevGroup = null;
+                return ["all", ...PRODUCT_TYPES_BY_CATEGORY[cat][subcat]].map((pt) => {
+                  const g = pt === "all" ? null : (PRODUCT_TYPE_GROUP[pt] || null);
+                  let heading = null;
+                  if (g && g !== prevGroup) heading = groupHeadings[g];
+                  // Ungrouped types after a group get a small gap, no label.
+                  const gap = !g && prevGroup;
+                  prevGroup = g;
+                  return (
+                    <Fragment key={pt}>
+                      {heading && <p style={headingStyle}>{heading}</p>}
+                      {gap && <div style={{ height: 10 }} />}
+                      <button onClick={() => updateParams({ ptype: pt })} style={{ textAlign: "left", background: "none", border: "none", cursor: "pointer", fontFamily: "Inter, sans-serif", fontSize: 14, color: ptype === pt ? C.ink : C.muted, fontWeight: ptype === pt ? 600 : 400 }}>{pt === "all" ? t.all : productTypeLabel(pt)}</button>
+                    </Fragment>
+                  );
+                });
+              })()}
             </div>
           </>
         )}
