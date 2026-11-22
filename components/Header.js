@@ -72,13 +72,13 @@ export function Header() {
       </div>
 
       {subcatsForActiveCat && (
-        <div style={{ borderTop: `1px solid ${C.line}` }}>
-          <div style={{ maxWidth: 1180, margin: "0 auto", padding: "10px 24px", display: "flex", alignItems: "center", gap: 24, flexWrap: "wrap" }}>
+        <div style={{ borderTop: `1px solid ${C.line}`, background: C.warm }}>
+          <div style={{ maxWidth: 1180, margin: "0 auto", padding: "12px 24px", display: "flex", alignItems: "center", gap: 32, flexWrap: "wrap" }}>
             {subcatsForActiveCat.map((s) => (
               <div key={s} onMouseEnter={() => setHoveredSubcat(s)} onMouseLeave={() => setHoveredSubcat(null)} style={{ position: "relative" }}>
                 <Link
                   href={`/browse?cat=${activeCat}&subcat=${s}`}
-                  style={{ background: "none", border: "none", cursor: "pointer", outline: "none", fontFamily: "Inter, sans-serif", fontSize: 13, fontWeight: activeSubcat === s ? 700 : 400, color: activeSubcat === s ? C.ink : C.muted, padding: "2px 0", textDecoration: "none" }}
+                  style={{ background: "none", border: "none", cursor: "pointer", outline: "none", fontFamily: "Inter, sans-serif", fontSize: 16, fontWeight: activeSubcat === s ? 700 : 500, color: C.ink, padding: "4px 0", textDecoration: "none", borderBottom: activeSubcat === s ? `2px solid ${C.bronze}` : "2px solid transparent" }}
                 >
                   {subcategoryLabel(s)}
                 </Link>
