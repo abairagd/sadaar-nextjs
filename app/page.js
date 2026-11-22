@@ -44,14 +44,14 @@ export default async function HomePage() {
       </section>
 
       {spotlights.length > 0 && (
-        <section style={{ maxWidth: 1180, margin: "0 auto", padding: "32px 24px 8px" }}>
+        <section style={{ maxWidth: "none", margin: "0 auto", padding: "32px 24px 8px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 18 }}>
             <Sparkles size={16} color={C.bronze} />
             <h2 style={{ fontFamily: "Fraunces, serif", fontSize: 20, color: C.ink, margin: 0 }}>{t.spotlight}</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, min(919px, calc((100vh - 140px) * 0.652))))", justifyContent: "center", gap: 20 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 20 }}>
             {spotlights.map((s) => (
-              <Link key={s.id} href={`/brand/${s.brand_slug}`} style={{ textAlign: "left", background: s.image_url ? `linear-gradient(to top, rgba(20,24,25,0.85), rgba(20,24,25,0.15)), url(${s.image_url}) center/cover` : C.deep, color: C.sand, border: "none", padding: 20, cursor: "pointer", textDecoration: "none", display: "flex", flexDirection: "column", justifyContent: s.image_url ? "flex-end" : "flex-start", aspectRatio: s.image_url ? "919 / 1409" : "auto" }}>
+              <Link key={s.id} href={`/brand/${s.brand_slug}`} style={{ textAlign: "left", background: s.image_url ? `linear-gradient(to top, rgba(20,24,25,0.85), rgba(20,24,25,0.15)), url(${s.image_url}) center/cover` : C.deep, color: C.sand, border: "none", padding: 20, cursor: "pointer", textDecoration: "none", display: "flex", flexDirection: "column", justifyContent: s.image_url ? "flex-end" : "flex-start", height: s.image_url ? "max(420px, calc(100vh - 140px))" : "auto" }}>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: C.bronze, margin: 0 }}>{t.spotlight}</p>
                 <p style={{ fontFamily: "Fraunces, serif", fontSize: 18, margin: "6px 0" }}>{s.brand_name}</p>
                 <p style={{ fontFamily: "Inter, sans-serif", fontSize: 12, color: "#C5CDCE", margin: 0 }}>{s.brand_description}</p>
